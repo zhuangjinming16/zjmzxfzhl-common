@@ -1,7 +1,8 @@
-package com.zjmzxfzhl.common.security.component.resource;
+package com.zjmzxfzhl.common.security.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zjmzxfzhl.common.core.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -17,11 +18,8 @@ import java.io.Serializable;
 public class ZjmzxfzhlAuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Autowired
     private ObjectMapper objectMapper;
-
-    public ZjmzxfzhlAuthenticationEntryPointImpl(ObjectMapper objectMapper){
-        this.objectMapper = objectMapper;
-    }
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {

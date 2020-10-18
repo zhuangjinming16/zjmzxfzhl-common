@@ -1,5 +1,6 @@
 package com.zjmzxfzhl.common.security.component.authorization;
 
+import com.zjmzxfzhl.common.security.component.ZjmzxfzhlAuthenticationEntryPointImpl;
 import com.zjmzxfzhl.common.security.util.AuthorizeRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,9 @@ public class ZjmzxfzhlSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ZjmzxfzhlSecurityProperties zjmzxfzhlSecurityProperties;
 
+    @Autowired
+    protected ZjmzxfzhlAuthenticationEntryPointImpl authenticationEntryPointImpl;
+
     /**
      * 解决 无法直接注入 AuthenticationManager
      */
@@ -38,6 +42,8 @@ public class ZjmzxfzhlSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic();
+        httpSecurity.exceptionHandling().authenticationEntryPoint(authenticationEntryPointImpl);
+
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
                 httpSecurity.authorizeRequests();
         AuthorizeRequestUtil.resolveAuthorizeRequest(registry, zjmzxfzhlSecurityProperties.getAuthorizeRequests());

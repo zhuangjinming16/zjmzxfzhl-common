@@ -1,12 +1,15 @@
 package com.zjmzxfzhl.common.security.component.resource;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zjmzxfzhl.common.core.constant.CacheConstants;
 import com.zjmzxfzhl.common.security.service.ElPermissionService;
 import com.zjmzxfzhl.common.security.service.RedisClientDetailsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 
@@ -31,8 +34,11 @@ public class ZjmzxfzhlResourceServerAutoConfiguration {
     }
 
     @Bean
-    public ZjmzxfzhlAuthenticationEntryPointImpl authenticationEntryPointImpl(ObjectMapper objectMapper){
-        return new ZjmzxfzhlAuthenticationEntryPointImpl(objectMapper);
+    @ConditionalOnMissingBean
+    public TokenStore tokenStore(RedisConnectionFactory redisConnectionFactory) {
+        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+        tokenStore.setPrefix(CacheConstants.OAUTH_ACCESS);
+        return tokenStore;
     }
 
     @Bean

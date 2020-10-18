@@ -69,6 +69,7 @@ public class ZjmzxfzhlAuthorizationServerAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public TokenStore tokenStore(RedisConnectionFactory redisConnectionFactory) {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
         tokenStore.setPrefix(CacheConstants.OAUTH_ACCESS);

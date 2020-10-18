@@ -1,4 +1,4 @@
-package com.zjmzxfzhl.common.security.component.resource;
+package com.zjmzxfzhl.common.security.component;
 
 import com.zjmzxfzhl.common.core.security.SecurityUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
