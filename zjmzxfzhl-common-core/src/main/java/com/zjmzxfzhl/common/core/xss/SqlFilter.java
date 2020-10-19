@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SqlFilter {
-    private final static String[] SQL_FILTER_STRINGS = {"'", "(", ")", ";", "+", ",", "and", "or", "exec", "insert",
+    private final static String[] SQL_FILTER_STRINGS = {"'", "(", ")", ";", "+", ",", "and ", "or ", "exec", "insert",
             "select", "delete", "update", "case", "drop", "count", "chr", "mid", "master", "truncate", "char",
             "declare"};
 
