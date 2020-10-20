@@ -32,11 +32,11 @@ public class LogAspect {
     public Object around(ProceedingJoinPoint point, Log log) throws Throwable {
         String className = point.getTarget().getClass().getName();
         String methodName = point.getSignature().getName();
-        LogInfo sysLog = SysLogUtils.getLogInfo();
-        sysLog.setLogContent(log.value());
-        sysLog.setLogType("2");
-        sysLog.setMethod(className + "." + methodName + "()");
-        sysLog.setRequestParam(paramsToJson(point.getArgs()));
+        LogInfo logInfo = SysLogUtils.getLogInfo();
+        logInfo.setLogContent(log.value());
+        logInfo.setLogType("2");
+        logInfo.setMethod(className + "." + methodName + "()");
+        logInfo.setRequestParam(paramsToJson(point.getArgs()));
         Long startTime = System.currentTimeMillis();
 
         Object result = null;
@@ -47,7 +47,7 @@ public class LogAspect {
             ex = e;
         }
         Long endTime = System.currentTimeMillis();
-        sysLog.setCostTime(endTime - startTime);
+        logInfo.setCostTime(endTime - startTime);
 
         String operateResult = "";
         if (result instanceof Result) {
@@ -57,7 +57,7 @@ public class LogAspect {
             operateResult = ex.getMessage();
         }
 
-        sysLog.setOperateResult(operateResult);
+        logInfo.setOperateResult(operateResult);
 
         AsyncThreadExecutorProperties asyncThreadExecutorProperties =
                 SpringContextUtils.getBeanIgnoreNotFound(AsyncThreadExecutorProperties.class);
@@ -66,12 +66,12 @@ public class LogAspect {
             AsyncManager.me().execute(new Runnable() {
                 @Override
                 public void run() {
-                    SpringContextUtils.getBean(LogService.class).save(sysLog, SecurityConstants.INNER_TRUE);
+                    SpringContextUtils.getBean(LogService.class).save(logInfo, SecurityConstants.INNER_TRUE);
                 }
             });
         } else {
             // 同步方式保存系统日志
-            SpringContextUtils.getBean(LogService.class).save(sysLog, SecurityConstants.INNER_TRUE);
+            SpringContextUtils.getBean(LogService.class).save(logInfo, SecurityConstants.INNER_TRUE);
         }
 
         if (ex != null) {
