@@ -5,7 +5,7 @@ import com.zjmzxfzhl.common.core.base.UserInfo;
 import com.zjmzxfzhl.common.core.constant.SecurityConstants;
 import com.zjmzxfzhl.common.core.constant.ServiceNameConstants;
 import com.zjmzxfzhl.common.remote.feign.factory.RemoteSysUserServiceFallbackFactory;
-import com.zjmzxfzhl.modules.sys.service.UserInfoService;
+import com.zjmzxfzhl.common.core.base.UserInfoService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

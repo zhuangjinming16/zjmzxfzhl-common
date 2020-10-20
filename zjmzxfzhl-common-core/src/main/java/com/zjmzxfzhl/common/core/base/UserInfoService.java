@@ -1,4 +1,4 @@
-package com.zjmzxfzhl.modules.sys.service;
+package com.zjmzxfzhl.common.core.base;
 
 import com.zjmzxfzhl.common.core.Result;
 import com.zjmzxfzhl.common.core.base.UserInfo;

@@ -1,11 +1,11 @@
 package com.zjmzxfzhl.common.remote.feign;
 
 import com.zjmzxfzhl.common.core.Result;
+import com.zjmzxfzhl.common.core.base.LogInfo;
+import com.zjmzxfzhl.common.core.base.LogService;
 import com.zjmzxfzhl.common.core.constant.SecurityConstants;
 import com.zjmzxfzhl.common.core.constant.ServiceNameConstants;
 import com.zjmzxfzhl.common.remote.feign.factory.RemoteLogServiceFallbackFactory;
-import com.zjmzxfzhl.modules.sys.entity.SysLog;
-import com.zjmzxfzhl.modules.sys.service.LogService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +22,11 @@ public interface RemoteLogService extends LogService {
     /**
      * 保存日志
      *
-     * @param sysLog
+     * @param logInfo
      * @return
      */
     @Override
     @PostMapping("/save")
-    Result save(@RequestBody SysLog sysLog, @RequestHeader(SecurityConstants.INNER) String inner);
+    Result save(@RequestBody LogInfo logInfo, @RequestHeader(SecurityConstants.INNER) String inner);
 
 }

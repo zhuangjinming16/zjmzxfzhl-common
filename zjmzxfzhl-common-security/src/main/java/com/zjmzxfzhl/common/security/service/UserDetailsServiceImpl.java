@@ -7,7 +7,7 @@ import com.zjmzxfzhl.common.core.security.SecurityUser;
 import com.zjmzxfzhl.common.core.util.CommonUtil;
 import com.zjmzxfzhl.common.core.util.SecurityUtils;
 import com.zjmzxfzhl.common.core.util.SpringContextUtils;
-import com.zjmzxfzhl.modules.sys.service.UserInfoService;
+import com.zjmzxfzhl.common.core.base.UserInfoService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;

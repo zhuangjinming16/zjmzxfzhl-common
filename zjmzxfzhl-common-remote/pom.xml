@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>com.zjmzxfzhl</groupId>
-            <artifactId>zjmzxfzhl-common-sys-api</artifactId>
+            <artifactId>zjmzxfzhl-common-core</artifactId>
         </dependency>
     </dependencies>
 

@@ -2,6 +2,7 @@ package com.zjmzxfzhl.common.log.aspect;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.zjmzxfzhl.common.core.Result;
+import com.zjmzxfzhl.common.core.base.LogInfo;
 import com.zjmzxfzhl.common.core.constant.SecurityConstants;
 import com.zjmzxfzhl.common.core.threadpool.AsyncThreadExecutorProperties;
 import com.zjmzxfzhl.common.core.threadpool.manager.AsyncManager;
@@ -9,8 +10,7 @@ import com.zjmzxfzhl.common.core.util.JacksonUtil;
 import com.zjmzxfzhl.common.core.util.SpringContextUtils;
 import com.zjmzxfzhl.common.log.annotation.Log;
 import com.zjmzxfzhl.common.log.util.SysLogUtils;
-import com.zjmzxfzhl.modules.sys.entity.SysLog;
-import com.zjmzxfzhl.modules.sys.service.LogService;
+import com.zjmzxfzhl.common.core.base.LogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +32,7 @@ public class LogAspect {
     public Object around(ProceedingJoinPoint point, Log log) throws Throwable {
         String className = point.getTarget().getClass().getName();
         String methodName = point.getSignature().getName();
-        SysLog sysLog = SysLogUtils.getSysLog();
+        LogInfo sysLog = SysLogUtils.getLogInfo();
         sysLog.setLogContent(log.value());
         sysLog.setLogType("2");
         sysLog.setMethod(className + "." + methodName + "()");

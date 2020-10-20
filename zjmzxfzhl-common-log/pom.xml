@@ -20,10 +20,6 @@
         </dependency>
         <dependency>
             <groupId>com.zjmzxfzhl</groupId>
-            <artifactId>zjmzxfzhl-common-sys-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zjmzxfzhl</groupId>
             <artifactId>zjmzxfzhl-common-security</artifactId>
         </dependency>
     </dependencies>
