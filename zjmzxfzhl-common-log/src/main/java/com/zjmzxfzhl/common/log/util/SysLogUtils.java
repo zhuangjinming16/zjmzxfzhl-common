@@ -2,6 +2,7 @@ package com.zjmzxfzhl.common.log.util;
 
 
 import com.zjmzxfzhl.common.core.base.LogInfo;
+import com.zjmzxfzhl.common.core.util.DateUtil;
 import com.zjmzxfzhl.common.core.util.IpUtils;
 import com.zjmzxfzhl.common.core.util.SecurityUtils;
 import org.springframework.security.core.Authentication;
@@ -27,6 +28,9 @@ public class SysLogUtils {
         logInfo.setRequestType(request.getMethod());
         logInfo.setUserAgent(request.getHeader("user-agent"));
         logInfo.setClientId(getClientId());
+        logInfo.setCreateBy(userId);
+        logInfo.setCreateDate(DateUtil.getNow());
+        logInfo.setCreateTime(DateUtil.getNow());
         return logInfo;
     }
 

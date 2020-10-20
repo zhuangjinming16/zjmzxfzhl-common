@@ -1,8 +1,14 @@
 package com.zjmzxfzhl.common.core.base;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 庄金明
@@ -75,4 +81,10 @@ public class LogInfo implements Serializable {
      * 耗时
      */
     private Long costTime;
+
+    private String createBy;
+
+    private Date createDate;
+
+    private Date createTime;
 }
