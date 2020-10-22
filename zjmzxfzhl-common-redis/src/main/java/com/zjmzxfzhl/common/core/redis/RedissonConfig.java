@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author 庄金明
@@ -19,18 +18,14 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 @ConditionalOnProperty(name = "zjmzxfzhl.redisson.enabled", havingValue = "true")
 public class RedissonConfig {
-    @Value("${spring.redis.sentinel.nodes:}")
-    private String nodes;
+
+    @Value("${zjmzxfzhl.redisson.config}")
+    private String redissonConfig;
 
     @Bean
     @SneakyThrows
     public RedissonClient redissonClient() {
-        Config config = null;
-        if (nodes != null && nodes.length() > 0) {
-            config = Config.fromYAML(new ClassPathResource("redisson-sentinel.yml").getInputStream());
-        } else {
-            config = Config.fromYAML(new ClassPathResource("redisson-single.yml").getInputStream());
-        }
+        Config config = Config.fromJSON(redissonConfig);
         return Redisson.create(config);
     }
 
